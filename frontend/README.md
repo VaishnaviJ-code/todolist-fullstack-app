@@ -1,16 +1,167 @@
-# React + Vite
+# TaskHub - Full-Stack To-Do List Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A professional, full-featured to-do list application built with modern web technologies. This project demonstrates a complete full-stack development workflow with authentication, real-time task management, and a beautiful responsive UI.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Authentication**: Secure signup and login with JWT tokens
+- **Task Management**: Create, read, update, and delete tasks with ease
+- **Status Tracking**: Mark tasks as pending or completed
+- **Dark Mode**: Toggle between light and dark themes with localStorage persistence
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+- **Form Validation**: Client-side and server-side validation with clear error messages
+- **Real-time Updates**: Optimistic UI updates with error rollback
+- **Accessibility**: ARIA labels, keyboard navigation, and focus indicators
+- **Delete Confirmation**: Confirmation dialog to prevent accidental deletions
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
+- **React 18** - UI library with hooks and context API
+- **Vite** - Lightning-fast build tool
+- **React Router v6** - Client-side routing
+- **Axios** - HTTP client for API calls
+- **Tailwind CSS v4** - Utility-first CSS framework
+- **Context API** - State management for authentication and theme
 
-## Expanding the ESLint configuration
+### Backend
+- **Node.js** - JavaScript runtime
+- **Express.js** - Web framework
+- **MongoDB Atlas** - Cloud database
+- **Mongoose** - MongoDB ODM
+- **JWT** - JSON Web Tokens for authentication
+- **bcryptjs** - Password hashing
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Project Structure
+
+todolist-app/
+├── backend/
+│ ├── controllers/
+│ │ ├── userController.js
+│ │ └── taskController.js
+│ ├── models/
+│ │ ├── User.js
+│ │ └── Task.js
+│ ├── routes/
+│ │ ├── userRoutes.js
+│ │ └── taskRoutes.js
+│ ├── middleware/
+│ │ └── auth.js
+│ ├── server.js
+│ ├── package.json
+│ └── .env
+├── frontend/
+│ ├── src/
+│ │ ├── api/
+│ │ │ └── api.js
+│ │ ├── context/
+│ │ │ └── AuthContext.jsx
+│ │ ├── components/
+│ │ │ ├── Header.jsx
+│ │ │ ├── TaskCard.jsx
+│ │ │ ├── TaskModal.jsx
+│ │ │ ├── ConfirmDialog.jsx
+│ │ │ ├── ProtectedRoute.jsx
+│ │ │ └── ThemeToggle.jsx
+│ │ ├── pages/
+│ │ │ ├── LoginPage.jsx
+│ │ │ ├── SignupPage.jsx
+│ │ │ └── DashboardPage.jsx
+│ │ ├── App.jsx
+│ │ ├── main.jsx
+│ │ └── index.css
+│ ├── vite.config.js
+│ ├── package.json
+│ └── index.html
+└── README.md
+
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+- Git
+- MongoDB Atlas account (free tier available)
+
+### Installation
+
+1. **Clone the repository:**
+  git clone https://github.com/YOUR_USERNAME/todolist-app.git
+  cd todolist-app
+2. **Setup Backend:**
+  cd backend
+  npm install
+  Create a `.env` file in the backend folder:
+    MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/todolist
+    JWT_SECRET=your_super_secret_jwt_key_here
+    PORT=5000
+3. **Setup Frontend:**
+   cd ../frontend
+   npm install
+4. **Run the Application:**
+    Terminal 1 - Backend:
+    cd backend
+    npm run dev
+   
+    Terminal 2 - Frontend:
+    cd frontend
+    npm run dev
+
+5. **Open in Browser:**
+Visit `http://localhost:5173/`
+
+## API Documentation
+
+### Authentication Endpoints
+
+**Signup:**
+- `POST /api/users/signup`
+- Body: `{ name, email, password }`
+
+**Login:**
+- `POST /api/users/login`
+- Body: `{ email, password }`
+
+### Task Endpoints (Protected)
+
+**Create Task:**
+- `POST /api/tasks`
+- Body: `{ title, description }`
+
+**Get All Tasks:**
+- `GET /api/tasks`
+
+**Update Task:**
+- `PATCH /api/tasks/:id`
+- Body: `{ title, description, status }`
+
+**Delete Task:**
+- `DELETE /api/tasks/:id`
+
+## Usage
+
+1. **Sign Up**: Create account with name, email, and password (min 6 chars, uppercase, lowercase, number)
+2. **Login**: Enter credentials to access dashboard
+3. **Create Task**: Click "Add Task" and fill in the form
+4. **Manage Tasks**: Edit, delete, or mark complete
+5. **Dark Mode**: Toggle theme with sun/moon icon
+6. **Logout**: Click logout button
+
+## Author
+
+**Vaishnavi Chandran**
+- GitHub: [Your GitHub URL]
+- Email: your.email@example.com
+
+## License
+
+This project is licensed under the MIT License.
+
+## Acknowledgments
+
+- Tailwind CSS
+- React Router
+- MongoDB
+- FAITH INFOTECH
