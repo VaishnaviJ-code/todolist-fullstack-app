@@ -34,46 +34,30 @@ A professional, full-featured to-do list application built with modern web techn
 
 ## Project Structure
 
-todolist-app/
-├── backend/
-│ ├── controllers/
-│ │ ├── userController.js
-│ │ └── taskController.js
-│ ├── models/
-│ │ ├── User.js
-│ │ └── Task.js
-│ ├── routes/
-│ │ ├── userRoutes.js
-│ │ └── taskRoutes.js
-│ ├── middleware/
-│ │ └── auth.js
-│ ├── server.js
-│ ├── package.json
-│ └── .env
-├── frontend/
-│ ├── src/
-│ │ ├── api/
-│ │ │ └── api.js
-│ │ ├── context/
-│ │ │ └── AuthContext.jsx
-│ │ ├── components/
-│ │ │ ├── Header.jsx
-│ │ │ ├── TaskCard.jsx
-│ │ │ ├── TaskModal.jsx
-│ │ │ ├── ConfirmDialog.jsx
-│ │ │ ├── ProtectedRoute.jsx
-│ │ │ └── ThemeToggle.jsx
-│ │ ├── pages/
-│ │ │ ├── LoginPage.jsx
-│ │ │ ├── SignupPage.jsx
-│ │ │ └── DashboardPage.jsx
-│ │ ├── App.jsx
-│ │ ├── main.jsx
-│ │ └── index.css
-│ ├── vite.config.js
-│ ├── package.json
-│ └── index.html
-└── README.md
+todolist-app/                          (root folder)
+├── backend/                           (backend folder)
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   ├── server.js
+│   ├── package.json
+│   └── .env
+├── frontend/                          (frontend folder)
+│   ├── src/
+│   │   ├── api/
+│   │   ├── context/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   ├── vite.config.js
+│   ├── package.json
+│   └── index.html
+├── .gitignore
+├── README.md
+└── (other config files)
 
 
 ## Getting Started
