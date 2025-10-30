@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import Header from '../components/Header';
 import TaskCard from '../components/TaskCard';
 import TaskModal from '../components/TaskModal';
@@ -12,7 +13,6 @@ const DashboardPage = () => {
   const [selectedTask, setSelectedTask] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [error, setError] = useState('');
   const [isSavingTask, setIsSavingTask] = useState(false);
 
   useEffect(() => {
@@ -21,12 +21,11 @@ const DashboardPage = () => {
 
   const fetchTasks = async () => {
     setIsLoading(true);
-    setError('');
     try {
       const response = await taskAPI.getTasks();
       setTasks(response.data.tasks || []);
     } catch (err) {
-      setError('Failed to load tasks. Please try again.');
+      toast.error('Failed to load tasks. Please try again.');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -54,15 +53,17 @@ const DashboardPage = () => {
             t._id === selectedTask._id ? { ...t, ...formData } : t
           )
         );
+        toast.success('Task updated successfully!');
       } else {
         // Create new task
         const response = await taskAPI.createTask(formData);
         setTasks([response.data.task, ...tasks]);
+        toast.success('Task created successfully!');
       }
       setIsModalOpen(false);
       setSelectedTask(null);
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to save task. Please try again.');
+      toast.error(err.response?.data?.message || 'Failed to save task.');
     } finally {
       setIsSavingTask(false);
     }
@@ -74,37 +75,33 @@ const DashboardPage = () => {
     setIsDeleting(true);
     try {
       await taskAPI.deleteTask(confirmDelete._id);
-      // Optimistic update
       setTasks(tasks.filter((t) => t._id !== confirmDelete._id));
       setConfirmDelete(null);
+      toast.success('Task deleted successfully!');
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to delete task. Please try again.');
+      toast.error(err.response?.data?.message || 'Failed to delete task.');
     } finally {
       setIsDeleting(false);
     }
   };
 
-  // MOVE THIS INSIDE THE COMPONENT
   const handleToggleComplete = async (task) => {
     try {
-      console.log('Toggling task:', task);
       const newStatus = task.status === 'completed' ? 'pending' : 'completed';
       
-      // Optimistic update - update UI immediately
+      // Optimistic update
       setTasks(
         tasks.map((t) =>
           t._id === task._id ? { ...t, status: newStatus } : t
         )
       );
       
-      // API call - update backend
+      // API call
       await taskAPI.updateTask(task._id, { status: newStatus });
-      console.log('Task updated successfully');
+      toast.success(newStatus === 'completed' ? 'Task completed!' : 'Task marked pending.');
     } catch (err) {
-      console.error('Error updating task:', err);
-      // Rollback on error
+      toast.error('Failed to update task.');
       setTasks(tasks);
-      setError(err.response?.data?.message || 'Failed to update task. Please try again.');
     }
   };
 
@@ -113,18 +110,6 @@ const DashboardPage = () => {
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {error && (
-          <div className="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-200 px-4 py-3 rounded-lg mb-6">
-            {error}
-            <button
-              onClick={() => setError('')}
-              className="ml-4 font-bold hover:underline"
-            >
-              Dismiss
-            </button>
-          </div>
-        )}
-
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
             My Tasks
