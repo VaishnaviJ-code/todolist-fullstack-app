@@ -84,6 +84,30 @@ const DashboardPage = () => {
     }
   };
 
+  // MOVE THIS INSIDE THE COMPONENT
+  const handleToggleComplete = async (task) => {
+    try {
+      console.log('Toggling task:', task);
+      const newStatus = task.status === 'completed' ? 'pending' : 'completed';
+      
+      // Optimistic update - update UI immediately
+      setTasks(
+        tasks.map((t) =>
+          t._id === task._id ? { ...t, status: newStatus } : t
+        )
+      );
+      
+      // API call - update backend
+      await taskAPI.updateTask(task._id, { status: newStatus });
+      console.log('Task updated successfully');
+    } catch (err) {
+      console.error('Error updating task:', err);
+      // Rollback on error
+      setTasks(tasks);
+      setError(err.response?.data?.message || 'Failed to update task. Please try again.');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
@@ -139,6 +163,7 @@ const DashboardPage = () => {
                 task={task}
                 onEdit={handleEditTask}
                 onDelete={(t) => setConfirmDelete(t)}
+                onToggleComplete={handleToggleComplete}
               />
             ))}
           </div>
