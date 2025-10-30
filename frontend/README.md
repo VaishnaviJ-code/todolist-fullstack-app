@@ -151,7 +151,7 @@ Visit `http://localhost:5173/`
 
 ## Author
 
-**Vaishnavi Chandran**
+**Vaishnavi J**
 - GitHub: [Your GitHub URL]
 - Email: your.email@example.com
 
