@@ -34,31 +34,51 @@ A professional, full-featured to-do list application built with modern web techn
 
 ## Project Structure
 
-todolist-app/                          (root folder)
-├── backend/                           (backend folder)
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── middleware/
-│   ├── server.js
-│   ├── package.json
-│   └── .env
-├── frontend/                          (frontend folder)
-│   ├── src/
-│   │   ├── api/
-│   │   ├── context/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css
-│   ├── vite.config.js
-│   ├── package.json
-│   └── index.html
-├── .gitignore
-├── README.md
-└── (other config files)
-
+todolist-app/
+│
+├── backend/
+│ ├── controllers/
+│ │ ├── userController.js # Authentication logic
+│ │ └── taskController.js # Task CRUD operations
+│ ├── models/
+│ │ ├── User.js # User schema with password hashing
+│ │ └── Task.js # Task schema with user reference
+│ ├── routes/
+│ │ ├── userRoutes.js # /api/users endpoints
+│ │ └── taskRoutes.js # /api/tasks endpoints
+│ ├── middleware/
+│ │ └── auth.js # JWT token verification
+│ ├── server.js # Express app initialization
+│ ├── package.json
+│ └── .env # Environment variables
+│
+├── frontend/
+│ ├── src/
+│ │ ├── api/
+│ │ │ └── api.js # Axios instance with interceptors
+│ │ ├── context/
+│ │ │ └── AuthContext.jsx # Global auth state & theme
+│ │ ├── components/
+│ │ │ ├── Header.jsx # Navigation bar
+│ │ │ ├── TaskCard.jsx # Individual task display
+│ │ │ ├── TaskModal.jsx # Create/Edit task modal
+│ │ │ ├── ConfirmDialog.jsx # Delete confirmation
+│ │ │ ├── ProtectedRoute.jsx # Route authentication guard
+│ │ │ └── ThemeToggle.jsx # Dark/Light mode toggle
+│ │ ├── pages/
+│ │ │ ├── LoginPage.jsx # Login form page
+│ │ │ ├── SignupPage.jsx # Signup form page
+│ │ │ └── DashboardPage.jsx # Main task dashboard
+│ │ ├── App.jsx # Main app component with routes
+│ │ ├── main.jsx # React DOM root
+│ │ └── index.css # Global styles + Tailwind
+│ ├── vite.config.js # Vite + Tailwind configuration
+│ ├── package.json
+│ └── index.html
+│
+├── .gitignore # Git ignore rules
+├── README.md # This file
+└── .git/ # Git repository
 
 ## Getting Started
 
