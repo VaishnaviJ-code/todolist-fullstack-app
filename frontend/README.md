@@ -152,8 +152,8 @@ Visit `http://localhost:5173/`
 ## Author
 
 **Vaishnavi J**
-- GitHub: [Your GitHub URL]
-- Email: your.email@example.com
+- GitHub: https://github.com/VaishnaviJ-code
+- Email: jvaishnavi2004@gmail.com
 
 ## License
 
@@ -164,4 +164,3 @@ This project is licensed under the MIT License.
 - Tailwind CSS
 - React Router
 - MongoDB
-- FAITH INFOTECH
